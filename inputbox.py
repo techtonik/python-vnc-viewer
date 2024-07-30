@@ -55,7 +55,7 @@ def ask(screen, question, default='', password=0):
     "ask(screen, question) -> answer"
     pygame.font.init()
     current_string = list(default)
-    display_box(screen, question + ": " + string.join(current_string,""))
+    display_box(screen, question + ": " + "".join(current_string))
     while 1:
         inkey = get_key()
         if inkey == K_BACKSPACE:
@@ -71,12 +71,12 @@ def ask(screen, question, default='', password=0):
         if password:
             display_box(screen, question + ": " + "*"*len(current_string))
         else:
-            display_box(screen, question + ": " + string.join(current_string,""))
-    return string.join(current_string,"")
+            display_box(screen, question + ": " + "".join(current_string))
+    return "".join(current_string)
 
 def main():
   screen = pygame.display.set_mode((220,40))
   screen.fill((0,100,255))
-  print ask(screen, "Name") + " was entered"
+  print(ask(screen, "Name") + " was entered")
 
 if __name__ == '__main__': main()

@@ -161,7 +161,7 @@ class PyGameApp:
             #then communicate that to the protocol...
         else:
             #~ self.screen = pygame.display.set_mode(self.area.size, winstyle, depth)
-            raise ValueError, "color depth not supported"
+            raise ValueError ("color depth not supported")
         self.background = pygame.Surface((self.width, self.height), depth)
         self.background.fill(0) #black
 
@@ -190,7 +190,7 @@ class PyGameApp:
                     elif e.unicode:
                         self.protocol.keyEvent(ord(e.unicode))
                     else:
-                        print "warning: unknown key %r" % (e)
+                        print("warning: unknown key %r" % (e))
                 elif e.type == KEYUP:
                     if e.key in MODIFIERS:
                         self.protocol.keyEvent(MODIFIERS[e.key], down=0)
@@ -311,10 +311,10 @@ class RFBToGUI(rfb.RFBClient):
         self.screen.fill(struct.unpack("BBBB", color), (x, y, width, height))
 
     def bell(self):
-        print "katsching"
+        print("katsching")
 
     def copy_text(self, text):
-        print "Clipboard: %r" % text
+        print("Clipboard: %r" % text)
 
 #use a derrived class for other depths. hopefully with better performance
 #that a single class with complicated/dynamic color conversion.
@@ -356,7 +356,7 @@ class VNCFactory(rfb.RFBFactory):
         elif depth == 8:
             self.protocol = RFBToGUIeightbits
         else:
-            raise ValueError, "color depth not supported"
+            raise ValueError("color depth not supported")
             
         if fast:
             self.encodings = [
@@ -412,10 +412,10 @@ def main():
     o = Options()
     try:
         o.parseOptions()
-    except usage.UsageError, errortext:
-        print "%s: %s" % (sys.argv[0], errortext)
-        print "%s: Try --help for usage details." % (sys.argv[0])
-        raise SystemExit, 1
+    except usage.UsageError as errortext:
+        print("%s: %s" % (sys.argv[0], errortext))
+        print("%s: Try --help for usage details." % (sys.argv[0]))
+        raise SystemExit(1)
 
     depth = int(o.opts['depth'])
 
